@@ -87,11 +87,3 @@ class ListingMethods:
             },
             timeout=REQUEST_TIMEOUT,
         )
-
-    @allure.step('Удалить все объявления пользователя')
-    def delete_all_user_listings(self, token):
-        response = self.get_own_listings(token)
-        assert response.status_code == 200, response.text
-
-        for listing in response.json()['offers']:
-            self.delete_listing(token, listing['id'])
